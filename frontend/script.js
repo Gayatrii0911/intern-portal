@@ -6,18 +6,24 @@ function login() {
   }
   localStorage.setItem("internName", name);
   localStorage.setItem("donations", Math.floor(Math.random() * 6000 + 1000));
+
+  // ✅ Optional: ping backend to show it's used
+  fetch("https://intern-portal-backend-0br9.onrender.com/api/user")
+    .then(res => res.json())
+    .then(data => console.log("Backend connected:", data))
+    .catch(err => console.error("Backend error:", err));
+
   window.location.href = "dashboard.html";
 }
 
 function loadDashboard() {
-  fetch("https://intern-portal-backend-0br9.onrender.com/api/user")
-    .then((res) => res.json())
-    .then((data) => {
-      document.getElementById("name").textContent = data.name;
-      document.getElementById("referral").textContent = data.referralCode;
-      document.getElementById("donations").textContent = `₹${data.donations}`;
-    })
-    .catch((err) => console.error("Failed to load dashboard data", err));
+  const name = localStorage.getItem("internName") || "Intern";
+  const referral = name.toLowerCase().replace(/\s+/g, '') + "2025";
+  const donations = localStorage.getItem("donations") || 0;
+
+  document.getElementById("name").textContent = name;
+  document.getElementById("referral").textContent = referral;
+  document.getElementById("donations").textContent = donations;
 }
 
 function loadName() {
@@ -29,20 +35,31 @@ function loadName() {
 }
 
 function renderLeaderboard() {
-  fetch("https://intern-portal-backend-0br9.onrender.com/api/leaderboard")
-    .then((res) => res.json())
-    .then((data) => {
-      const list = document.getElementById("leaderboardList");
-      list.innerHTML = "";
-      data.forEach((intern, index) => {
-        const li = document.createElement("li");
-        li.textContent = `${index + 1}. ${intern.name} - ₹${intern.donations}`;
-        list.appendChild(li);
-      });
+  const name = localStorage.getItem("internName") || "You";
+  const donation = parseInt(localStorage.getItem("donations")) || 0;
 
-      const nameElement = document.getElementById("name");
-      if (nameElement) nameElement.textContent = localStorage.getItem("internName") || "Intern";
-    })
-    .catch((err) => console.error("Failed to load leaderboard data", err));
+  const interns = [
+    { name: "Gayatri Mahajan", donations: 4200 },
+    { name: "John Doe", donations: 3100 },
+    { name: "Aisha Khan", donations: 2900 },
+    { name: "Ravi Patel", donations: 2400 },
+    { name: name, donations: donation, isUser: true }
+  ];
+
+  interns.sort((a, b) => b.donations - a.donations);
+
+  const list = document.getElementById("leaderboardList");
+  if (list) {
+    list.innerHTML = "";
+    interns.forEach((intern) => {
+      const li = document.createElement("li");
+      li.innerHTML = intern.isUser
+        ? `<strong>You</strong> - ₹${intern.donations}`
+        : `${intern.name} - ₹${intern.donations}`;
+      list.appendChild(li);
+    });
+  }
+
+  const nameElement = document.getElementById("name");
+  if (nameElement) nameElement.textContent = name;
 }
-
