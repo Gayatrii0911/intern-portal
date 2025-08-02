@@ -66,5 +66,5 @@ Then open frontend/index.html in browser to test.
 
 📫 Contact
 Made by GAYATRI MAHAJAN
-🔗 LinkedIn: 
+🔗 LinkedIn: https://www.linkedin.com/in/gayatrimahajan-0015a622b
 📧 gayatrimahajan091105@gmail.com
