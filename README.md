@@ -6,8 +6,8 @@ A basic full-stack intern portal built using HTML, CSS, JavaScript (frontend) an
 
 ## 🌐 Live Demo
 
-- 🔗 **Frontend**: [https://your-netlify-url.netlify.app](https://your-netlify-url.netlify.app)
-- 🔗 **Backend API**: [https://your-render-api.onrender.com/api/user](https://your-render-api.onrender.com/api/user)
+- 🔗 **Frontend**: [https://intern-portal-website.netlify.app/](https://intern-portal-website.netlify.app/)
+- 🔗 **Backend API**: [https://intern-portal-backend-0br9.onrender.com/api/user](https://intern-portal-backend-0br9.onrender.com/api/user)
 
 
 
@@ -53,7 +53,7 @@ INTERN PORTAL/
 
 
 # Clone the repo
-git clone https://github.com/yourusername/intern-portal.git
+git clone https://github.com/Gayatrii0911/intern-portal.git
 cd intern-portal/backend
 
 # Install backend dependencies
@@ -66,5 +66,5 @@ Then open frontend/index.html in browser to test.
 
 📫 Contact
 Made by GAYATRI MAHAJAN
-🔗 LinkedIn
+🔗 LinkedIn: 
 📧 gayatrimahajan091105@gmail.com
